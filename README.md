@@ -24,6 +24,8 @@ It also captures position, direction and speed of movement.
 ## Usage
 
 ```javascript
+import Mouse from "@jworkshop/mouse";
+
 /* Get the container for the mouse. */
 var container = document.getElementById("container");
 

@@ -884,13 +884,12 @@ class Mouse {
     /* Update the mouse direction with the new position. */
     this.direction = getDirection(position, newPosition);
 
-    let { x: prevX, y: prevY } = position;
-    let { x: newX, y: newY } = newPosition;
-
     /* Update the mouse position. */
-    this.previousPosition = position !== null ? { x: prevX, y: prevY } : null;
+    this.previousPosition =
+      position !== null ? { x: position.x, y: position.y } : null;
 
-    this.position = newPosition !== null ? { x: newX, y: newY } : null;
+    this.position =
+      newPosition !== null ? { x: newPosition.x, y: newPosition.y } : null;
 
     /* Update the time-stamp. */
     this.lastUpdateTime = currentTime;

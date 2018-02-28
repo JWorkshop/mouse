@@ -34,10 +34,10 @@ var container = document.getElementById("container");
 var mouse = new Mouse(container);
 
 /** Append the mouse to the a DOM element and event functions to it. */
-mouse.attachToElement(container);
+mouse.attach(container);
 
 /** Disengage the mouse from DOM element and event functions from it. */
-mouse.detachFromElement();
+mouse.detach();
 
 /** Toggle value for mouse prevent default on all events. */
 mouse.setPreventDefault(preventDefault);

@@ -229,7 +229,7 @@ class Mouse {
 
     /* Append the canvas to the DIV container. */
     if (container) {
-      this.attachToElement(container);
+      this.attach(container);
     }
   }
 
@@ -896,12 +896,12 @@ class Mouse {
   }
 
   /** Append the mouse to the a DOM element and event functions to it. */
-  attachToElement(element) {
+  attach(element) {
     const { listenElement } = this;
 
     /* Remove the previous element first before attach a new one. */
     if (listenElement) {
-      this.detachFromElement();
+      this.detach();
     }
 
     if (isValidDOMElement(element)) {
@@ -914,7 +914,7 @@ class Mouse {
   }
 
   /** Disengage the mouse from DOM element and event functions from it. */
-  detachFromElement() {
+  detach() {
     /* Disengage all the mouse events from each corresponding handler. */
     this._removeListeners();
 

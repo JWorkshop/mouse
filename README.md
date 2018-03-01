@@ -19,7 +19,7 @@ It also captures position, direction and speed of movement.
 
 ## install
 
-[![NPM](https://nodei.co/npm/@jworkshop/mouse.png)](https://nodei.co/npm/@jworkshop/mouse/)
+[![NPM](https://nodei.co/npm/@jworkshop/mouse.png)](https://nodei.co/npm/@jworkshop/mouse)
 
 ## Usage
 

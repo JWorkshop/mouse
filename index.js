@@ -1,1 +1,1 @@
-module.exports = require("./lib/mouse").default;
+module.exports = require("./lib/index").default;

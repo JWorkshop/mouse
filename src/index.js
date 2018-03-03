@@ -22,7 +22,7 @@ const getDistance = (position1, position2) => {
  *  in terms of the angle oriented to the East. */
 const getDirection = (position1, position2) => {
   let { x, y } = getDistanceVector(position1, position2);
-  return atan2(x, y);
+  return atan2(y, x);
 };
 
 /** Detecting option support */
@@ -329,61 +329,6 @@ class Mouse {
     }
   }
 
-  /** Perform action for over event */
-  _fireOverEvent(event) {
-    this._fireEvents(this.overEvents, event);
-  }
-
-  /** Perform action for out event */
-  _fireOutEvent(event) {
-    this._fireEvents(this.outEvents, event);
-  }
-
-  /** Perform action for down event */
-  _fireDownEvent(event) {
-    this._fireEvents(this.downEvents, event);
-  }
-
-  /** Perform action for up event */
-  _fireUpEvent(event) {
-    this._fireEvents(this.upEvents, event);
-  }
-
-  /** Perform action for move event */
-  _fireMoveEvent(event) {
-    this._fireEvents(this.moveEvents, event);
-  }
-
-  /** Perform action for scroll event */
-  _fireScrollEvent(event) {
-    this._fireEvents(this.scrollEvents, event);
-  }
-
-  /** Perform action for drag event */
-  _fireDragEvent(event) {
-    this._fireEvents(this.dragEvents, event);
-  }
-
-  /** Perform action for drag event */
-  _fireDragOverEvent(event) {
-    this._fireEvents(this.dragOverEvents, event);
-  }
-
-  /** Perform action for drop event */
-  _fireDropEvent(event) {
-    this._fireEvents(this.dropEvents, event);
-  }
-
-  /** Perform action for stop event */
-  _fireStopEvent(event) {
-    this._fireEvents(this.stopEvents, event);
-  }
-
-  /** Perform action for click event */
-  _fireClickEvent(event) {
-    this._fireEvents(this.clickEvents, event);
-  }
-
   /** When the mouse comes into the parent container. */
   _mouseOver(event) {
     let { isTouching, preventDefault } = this;
@@ -401,7 +346,7 @@ class Mouse {
       this._updatePosition(null);
 
       /* Perform action for over event */
-      this._fireOverEvent(event);
+      this._fireEvents(this.overEvents, event);
     }
   }
 
@@ -422,7 +367,7 @@ class Mouse {
       this._updatePosition(null);
 
       /* Perform action for out event */
-      this._fireOutEvent(event);
+      this._fireEvents(this.outEvents, event);
     }
   }
 
@@ -463,7 +408,7 @@ class Mouse {
       this.isMouseDown = true;
 
       /* Perform action for down event. */
-      this._fireDownEvent(event);
+      this._fireEvents(this.downEvents, event);
 
       this._addDocumentMouseListener();
     }
@@ -507,7 +452,7 @@ class Mouse {
       this.isMouseDown = false;
 
       /* Perform action for up event. */
-      this._fireUpEvent(event);
+      this._fireEvents(this.upEvents, event);
 
       this._removeDocumentMouseListener();
     }
@@ -544,12 +489,12 @@ class Mouse {
       clearTimeout(stoppingThread);
       this.stoppingThread = setTimeout(() => this._stop(event), STOP_DELAY);
 
-      /* Perform action for move event.
-       * If a mouse button is pressed, Perform action for drag event as well. */
-      this._fireMoveEvent(event);
+      /* Perform action for move event. */
+      this._fireEvents(this.moveEvents, event);
 
+      /* If a mouse button is pressed, Perform action for drag event as well. */
       if (isMouseDown === true) {
-        this._fireDragEvent(event);
+        this._fireEvents(this.dragEvents, event);
       }
     }
   }
@@ -577,8 +522,8 @@ class Mouse {
 
       this.scrollDelta = max(-1, min(1, event.wheelDelta || -event.detail));
 
-      /* Perform action for move event. */
-      this._fireScrollEvent(event);
+      /* Perform action for scroll event. */
+      this._fireEvents(this.scrollEvents, event);
     }
   }
 
@@ -603,7 +548,7 @@ class Mouse {
     });
 
     /* Perform action for drag over event. */
-    this._fireDragOverEvent(event);
+    this._fireEvents(this.dragOverEvents, event);
   }
 
   /** When the mouse has dropped something in the container. */
@@ -627,7 +572,7 @@ class Mouse {
     });
 
     /* Perform action for drop event. */
-    this._fireDropEvent(event);
+    this._fireEvents(this.dropEvents, event);
   }
 
   /** When the mouse has stop moving in the container. */
@@ -644,7 +589,7 @@ class Mouse {
       this.direction = 0;
 
       /* Perform action for stop event. */
-      this._fireStopEvent(event);
+      this._fireEvents(this.stopEvents, event);
     }
   }
 
@@ -674,8 +619,8 @@ class Mouse {
         y: event.clientY - offsetPosition.y
       });
 
-      /* Perform action for stop event. */
-      this._fireClickEvent(event);
+      /* Perform action for click event. */
+      this._fireEvents(this.clickEvents, event);
     }
   }
 
@@ -706,7 +651,7 @@ class Mouse {
     this.isMouseDown = true;
 
     /* Perform action for down event. */
-    this._fireDownEvent(event);
+    this._fireEvents(this.downEvents, event);
   }
 
   /** When a contact is remove on the touch surface. */
@@ -739,7 +684,7 @@ class Mouse {
     this.isMouseDown = false;
 
     /* Perform action for up event. */
-    this._fireUpEvent(event);
+    this._fireEvents(this.upEvents, event);
 
     setTimeout(() => (this.isTouching = false), 0);
   }
@@ -771,12 +716,12 @@ class Mouse {
     clearTimeout(stoppingThread);
     this.stoppingThread = setTimeout(() => this._stop(event), STOP_DELAY);
 
-    /* Perform action for move event.
-     * If a mouse button is pressed, perform action for drag event as well. */
-    this._fireMoveEvent(event);
+    /* Perform action for move event. */
+    this._fireEvents(this.moveEvents, event);
 
+    /* If a mouse button is pressed, perform action for drag event as well. */
     if (isMouseDown === true) {
-      this._fireDragEvent(event);
+      this._fireEvents(this.dragEvents, event);
     }
   }
 
@@ -798,7 +743,7 @@ class Mouse {
     this._updatePosition(null);
 
     /* Perform action for over event */
-    this._fireOverEvent(event);
+    this._fireEvents(this.overEvents, event);
   }
 
   /** When a contact leaves the bound-to element on the touch surface. */
@@ -817,7 +762,7 @@ class Mouse {
     this._updatePosition(null);
 
     /* Perform action for over event. */
-    this._fireOutEvent(event);
+    this._fireEvents(this.outEvents, event);
 
     setTimeout(() => (this.isTouching = false), 0);
   }
@@ -839,7 +784,7 @@ class Mouse {
     this._updatePosition(null);
 
     /* Perform action for over event. */
-    this._fireOutEvent(event);
+    this._fireEvents(this.outEvents, event);
 
     setTimeout(() => (this.isTouching = false), 0);
   }

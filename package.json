@@ -1,6 +1,6 @@
 {
   "name": "@jworkshop/mouse",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description":
     "An instance class which hooks into all mouse and touch events.",
   "author": "jworkshop <john.joydesign@gmail.com>",
